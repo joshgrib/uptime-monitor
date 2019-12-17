@@ -76,12 +76,6 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col>
-        <v-card>
-          <v-card-title class="headline mb-1">History</v-card-title>
-          <v-card-text>{{ history }}</v-card-text>
-        </v-card>
-      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -137,11 +131,16 @@ export default {
       this.history = (await axios.get(`${API_BASE}/history`)).data
     },
     async deleteRoute (route) {
-      return await axios.get(`${API_BASE}/routes/remove`, { route })
+      await axios.get(`${API_BASE}/routes/remove`, {
+        params: { route }
+      })
+      this.loadHistory()
     },
     async addRoute () {
       const route = this.newRouteValue
-      await axios.get(`${API_BASE}/routes/add?route=${route}`)
+      await axios.get(`${API_BASE}/routes/add`, {
+        params: { route }
+      })
       this.newRouteValue = undefined
       this.loadHistory()
     }
