@@ -21,6 +21,7 @@ A simple server for performance monitoring
   * [x] Display some basic charts for each route
   * [ ] Add a big chart for all routes
   * [ ] Automatically refresh history
+  * [ ] Try out [Tailwind](https://github.com/tailwindcss/tailwindcss)
 
 ## Screenshots
 
