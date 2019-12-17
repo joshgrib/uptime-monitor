@@ -4,6 +4,7 @@
       <v-col>
         <v-text-field
           v-model="newRouteValue"
+          color="success"
           label="Add a new URL"
           prepend-icon="mdi-plus"
           outlined
