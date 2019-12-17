@@ -15,6 +15,5 @@ A simple server for performance monitoring
 * [x] Reset ping interval when refresh rate is changed
 * [x] Move history into a DB for persistence
   * [_] Use a real DB instead of a JSON file?
-* [_] Break out into a new repo
-* [_] Better frontend UI to display history
+* [x] Break out into a new repo
 * [_] Maybe use websocket to send updated history
