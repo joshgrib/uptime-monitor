@@ -9,8 +9,8 @@ const db = require('./db')
 
 const app = express()
 
-const INIT_SAVE_RATE_MS = 1000 * 30
-const INIT_PING_RATE_MS = 1000 * 15
+const INIT_SAVE_RATE_MS = 1000 * 60 * 10
+const INIT_PING_RATE_MS = 1000 * 60 * 5
 
 /*******************************************************************************
  * Middleware
@@ -43,7 +43,7 @@ app.get('/routes/remove', (req, res) => {
   res.send(`Removed route: "${routeToRemove}"`)
 })
 app.get('/history', (req, res) => {
-  res.send(jsonConvert.toHtmlTable(pinger.history))
+  res.json(pinger.history)
 })
 app.get('/set-refresh/:refreshMs', (req, res) => {
   pinger.changeRefreshRate(req.params.refreshMs)
