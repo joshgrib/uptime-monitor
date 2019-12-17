@@ -9,7 +9,8 @@ export default new Vuetify({
     dark: true,
     themes: {
       dark: {
-        primary: colors.orange.darken2
+        primary: colors.orange.darken3,
+        error: colors.red.darken1
       }
     }
   }
