@@ -9,8 +9,8 @@ const db = require('./db')
 
 const app = express()
 
-const INIT_SAVE_RATE_MS = 1000 * 60 * 10
-const INIT_PING_RATE_MS = 1000 * 60 * 5
+const INIT_SAVE_RATE_MS = 1000 * 30
+const INIT_PING_RATE_MS = 1000 * 15
 
 /*******************************************************************************
  * Middleware

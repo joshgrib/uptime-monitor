@@ -42,6 +42,7 @@ class Pinger {
     this.refreshMs = refreshMs
     this.history = history
     // start collecting history immediately
+    this.recordHistory()
     this.refreshTimerId = setInterval(this.recordHistory.bind(this), this.refreshMs)
   }
   /**
