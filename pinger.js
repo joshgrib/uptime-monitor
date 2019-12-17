@@ -52,6 +52,7 @@ class Pinger {
   addRoute (route) {
     if (!this.routes.includes(route)) {
       this.routes.push(route)
+      this.recordHistory()
     }
   }
   /**
@@ -62,6 +63,7 @@ class Pinger {
     const idx = this.routes.indexOf(route)
     if (idx !== -1) {
       this.routes.splice(idx, 1)
+      this.recordHistory()
     }
   }
   /**
