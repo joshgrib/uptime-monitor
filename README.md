@@ -14,7 +14,14 @@ A simple server for performance monitoring
 * [x] Be able to add/remove routes from the pinger list
 * [x] Reset ping interval when refresh rate is changed
 * [x] Move history into a DB for persistence
-  * [_] Use a real DB instead of a JSON file?
+  * [ ] Use a real DB instead of a JSON file?
 * [x] Break out into a new repo
 * [/] Better frontend UI to display history
-* [_] Maybe use websocket to send updated history
+  * [x] Add frontend to add/remove routes
+  * [x] Display some basic charts for each route
+  * [ ] Add a big chart for all routes
+  * [ ] Automatically refresh history
+
+## Screenshots
+
+![screenshot](./screenshot.png "Status as of 20191217")

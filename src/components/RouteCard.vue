@@ -42,7 +42,7 @@
           </v-col>
           <v-col class="text-center">
             <header class="text-uppercase">
-              Spped
+              Speed
             </header>
             <v-rating
               readonly
@@ -51,6 +51,21 @@
               background-color="primary lighten-3"
               color="primary"
             />
+          </v-col>
+          <v-col>
+            <header class="text-uppercase">
+              Recent failures
+            </header>
+            <ul>
+              <li v-if="recentFailures.length === 0">None!</li>
+              <li
+                v-else
+                v-for="(failure, idx) in recentFailures"
+                :key="idx"
+              >
+                {{ failure.timestamp }}
+              </li>
+            </ul>
           </v-col>
         </v-row>
       </dev>
@@ -106,6 +121,12 @@ export default {
         times: responseTimes,
         speedRating: ((5000 - average) / 5000) * 5
       }
+    },
+    recentFailures () {
+      const history = [...this.failHistory]
+      return history.sort((a, b) => {
+        return a.timestamp > b.timestamp ? -1 : 1
+      })
     }
   }
 }
