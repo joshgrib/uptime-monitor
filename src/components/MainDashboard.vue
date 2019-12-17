@@ -15,66 +15,14 @@
     </v-row>
     <v-row>
       <v-col
-        v-for="({ route, requests, timing }, idx) in routeStats"
+        v-for="(route, idx) in routes"
         :key="idx"
       >
-        <v-card>
-          <v-card-title class="mb-1">
-            {{ route }}
-          </v-card-title>
-          <v-card-text>
-            <v-row no-gutters>
-              <v-col>
-                <v-sparkline
-                  :value="timing.times"
-                  auto-draw
-                  smooth
-                  gradientDirection="top"
-                  :gradient="['red', 'yellow', 'green']"
-                  height="50"
-                />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col class="text-center">
-                <header class="text-uppercase">Uptime</header>
-                <v-progress-circular
-                  :value="requests.success / requests.total * 100"
-                  color="success"
-                  :size="90"
-                  :width="10"
-                >
-                  <span class="headline">
-                    {{ (requests.success / requests.total * 100).toFixed(0) }}%
-                  </span>
-                  <br>
-                </v-progress-circular>
-                <p>{{ requests.total }} total requests</p>
-              </v-col>
-              <v-col class="text-center">
-                <header class="text-uppercase">
-                  Spped
-                </header>
-                <v-rating
-                  readonly
-                  v-model="timing.speedRating"
-                  half-increments
-                  background-color="primary lighten-3"
-                  color="primary"
-                />
-              </v-col>
-            </v-row>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="error"
-              @click="deleteRoute(route)"
-            >
-              <v-icon left>mdi-delete</v-icon>
-              Delete
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+        <route-card
+          :route="route"
+          :history="history.filter(h => h.route === route)"
+          @delete="deleteRoute(route)"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -82,11 +30,13 @@
 
 <script>
 import axios from 'axios'
+import RouteCard from './RouteCard'
 
 const API_BASE = 'http://localhost:3000'
 
 export default {
   name: 'MainDashboard',
+  components: { RouteCard },
   data () {
     return {
       routes: [],
@@ -97,33 +47,6 @@ export default {
   },
   mounted () {
     this.loadHistory()
-  },
-  computed: {
-    routeStats () {
-      const routes = this.routes
-      return routes.map(route => {
-        const routeHistory = this.history.filter(h => h.route === route)
-        const failedHistory = routeHistory.filter(h => h.responseTime === -1)
-        const successHistory = routeHistory.filter(h => h.responseTime !== -1)
-        const responseTimes = successHistory.map(h => h.responseTime)
-        const requests = {
-          total: routeHistory.length,
-          failed: failedHistory.length,
-          success: successHistory.length
-        }
-        const samples = responseTimes.length
-        const totalWaitTime = responseTimes.reduce((acc, curr) => acc + curr, 0)
-        const average = totalWaitTime / responseTimes.length
-        const timing = {
-          samples,
-          totalWaitTime,
-          average,
-          times: responseTimes,
-          speedRating: ((5000 - average) / 5000) * 5
-        }
-        return { route, requests, timing }
-      })
-    }
   },
   methods: {
     async loadHistory () {
