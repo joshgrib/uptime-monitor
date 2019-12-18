@@ -11,7 +11,7 @@
       >
         No history yet!
       </v-alert>
-      <dev v-else>
+      <div v-else>
         <v-row no-gutters>
           <v-col>
             <v-sparkline
@@ -68,7 +68,7 @@
             </ul>
           </v-col>
         </v-row>
-      </dev>
+      </div>
     </v-card-text>
     <v-card-actions>
       <v-btn

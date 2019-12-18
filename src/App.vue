@@ -1,30 +1,60 @@
 <template>
-  <v-app id="app">
-    <v-app-bar
-      app
-      dense
-      clipped-left
-      color="primary"
-      class="wavy-bg"
-    >
-      <v-toolbar-title>
-        <span class="headline font-weight-thin">
-          {{ title }}
-        </span>
-        <span class="subtitle-1 font-weight-bold font-italic">
-          {{ subtitle }}
-        </span>
-      </v-toolbar-title>
-    </v-app-bar>
+  <div>
+    <header class="bg-orange-500">
+      <h1>
+        <code class="text-xl p-4">{{ title }}</code>
+        <span>{{ subtitle }}</span>
+      </h1>
+    </header>
+    <div class="container mx-auto">
+      <section class="rounded bg-gray-200">
+        <input
+          type="text"
+          placeholder="http://www.my-url.to/ping"
+          class="shadow appearance-none border rounded p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-4/5"
+        >
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded focus:outline-none focus:shadow-outline w-1/5" type="button">
+          Add (<kbd>Enter</kbd>)
+        </button>
+      </section>
+      <div class="bg-white rounded-lg p6">
+        <div class="text-center">
+          <h2 class="text-lg">Title</h2>
+          <p class="text-purple-500">Some other stuff</p>
+          <p class="text-gray-600">Even more stuff</p>
+          <p class="text-gray-600">Even more stuff</p>
+        </div>
+      </div>
+    </div>
+    <v-app id="app">
+      <!--
+      <v-app-bar
+        app
+        dense
+        clipped-left
+        color="primary"
+        class="wavy-bg"
+      >
+        <v-toolbar-title>
+          <span class="headline font-weight-thin">
+            {{ title }}
+          </span>
+          <span class="subtitle-1 font-weight-bold font-italic">
+            {{ subtitle }}
+          </span>
+        </v-toolbar-title>
+      </v-app-bar>
+      -->
 
-    <v-content>
-      <main-dashboard />
-    </v-content>
+      <v-content>
+        <main-dashboard />
+      </v-content>
 
-    <v-footer app>
-      <span>{{ footer }}</span>
-    </v-footer>
-  </v-app>
+      <v-footer app>
+        <span>{{ footer }}</span>
+      </v-footer>
+    </v-app>
+  </div>
 </template>
 
 <script>
