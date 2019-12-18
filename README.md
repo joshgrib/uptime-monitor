@@ -16,13 +16,15 @@ A simple server for performance monitoring
 * [x] Move history into a DB for persistence
   * [ ] Use a real DB instead of a JSON file?
 * [x] Break out into a new repo
-* [/] Better frontend UI to display history
+* [-] Better frontend UI to display history
   * [x] Add frontend to add/remove routes
   * [x] Display some basic charts for each route
   * [ ] Add a big chart for all routes
   * [ ] Automatically refresh history
-  * [ ] Try out [Tailwind](https://github.com/tailwindcss/tailwindcss)
+  * [-] Try out [Tailwind](https://github.com/tailwindcss/tailwindcss)
 
 ## Screenshots
+
+**20191217**
 
 ![screenshot](./screenshot.png "Status as of 20191217")
