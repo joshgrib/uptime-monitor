@@ -8,7 +8,7 @@
     >
     <button
       type="button"
-      class="p-3 w-1/5 text-white font-bold bg-blue-500 hover:bg-blue-700 rounded-r-full"
+      class="p-3 w-1/5 text-white font-bold bg-blue-500 hover:bg-blue-700 rounded-r-full truncate whitespace-no-wrap"
       @click="submit"
     >
       Add (<kbd>Enter</kbd>)
