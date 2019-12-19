@@ -4,7 +4,7 @@
       v-model="newUrlText"
       type="text"
       placeholder="http://www.my-url.to/ping"
-      class="p-3 w-4/5 bg-gray-100 text-gray-700 rounded-l-full"
+      class="p-3 w-4/5 bg-blue-100 text-gray-700 rounded-l-full"
     >
     <button
       type="button"

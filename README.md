@@ -21,7 +21,8 @@ A simple server for performance monitoring
   * [x] Display some basic charts for each route
   * [ ] Add a big chart for all routes
   * [ ] Automatically refresh history
-  * [-] Try out [Tailwind](https://github.com/tailwindcss/tailwindcss)
+  * [x] Try out [Tailwind](https://github.com/tailwindcss/tailwindcss)
+  * [x] Replace Vuetify with Tailwind
 
 ## Screenshots
 

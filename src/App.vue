@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-screen">
     <header class="bg-orange-500 p-2 shadow">
       <h1>
         <code class="text-xl p-4">uptime-monitor</code>
@@ -9,12 +9,14 @@
     <main class="p-4 mx-auto">
       <add-url-form @submit="addUrl" />
       <monitor-item
-        v-for="(url, idx) in urls"
+        v-for="(route, idx) in routes"
         :key="idx"
-        :url="url"
+        :url="route"
+        :history="history.filter(h => h.route === route)"
+        @delete="deleteRoute(route)"
       />
     </main>
-    <footer class="bg-gray-900 text-white p-1">
+    <footer class="fixed w-full bottom-0 bg-gray-900 text-white p-1">
       <span>2019 - Josh Gribbon</span>
       <a
         class="text-blue-200 hover:text-orange-300"
@@ -52,26 +54,29 @@
         <span>{{ footer }}</span>
       </v-footer>
       -->
-      <main-dashboard />
       
     </v-app>
   </div>
 </template>
 
 <script>
-import MainDashboard from './components/MainDashboard'
+import axios from 'axios'
+
 import AddUrlForm from './components/AddUrlForm'
 import MonitorItem from './components/MonitorItem'
+
+const API_BASE = 'http://localhost:3000'
 
 export default {
   name: 'app',
   components: {
     AddUrlForm,
-    MonitorItem,
-    MainDashboard
+    MonitorItem
   },
   data () {
     return {
+      routes: [],
+      history: [],
       urls: [
         'http://www.fast.com',
         'http://github.com',
@@ -81,9 +86,25 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.loadHistory()
+  },
   methods: {
-    addUrl (newUrl) {
-      this.urls.push(newUrl)
+    async addUrl (route) {
+      await axios.get(`${API_BASE}/routes/add`, {
+        params: { route }
+      })
+      this.loadHistory()
+    },
+    async loadHistory () {
+      this.routes = (await axios.get(`${API_BASE}/routes`)).data
+      this.history = (await axios.get(`${API_BASE}/history`)).data
+    },
+    async deleteRoute (route) {
+      await axios.get(`${API_BASE}/routes/remove`, {
+        params: { route }
+      })
+      this.loadHistory()
     }
   }
 }
