@@ -26,46 +26,20 @@
         Github
       </a>
     </footer>
-
-    <v-app id="app">
-      <!--
-      <v-app-bar
-        app
-        dense
-        clipped-left
-        color="primary"
-        class="wavy-bg"
-      >
-        <v-toolbar-title>
-          <span class="headline font-weight-thin">
-            {{ title }}
-          </span>
-          <span class="subtitle-1 font-weight-bold font-italic">
-            {{ subtitle }}
-          </span>
-        </v-toolbar-title>
-      </v-app-bar>
-
-      <v-content>
-        <main-dashboard />
-      </v-content>
-
-      <v-footer app>
-        <span>{{ footer }}</span>
-      </v-footer>
-      -->
-      
-    </v-app>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 
 import AddUrlForm from './components/AddUrlForm'
 import MonitorItem from './components/MonitorItem'
 
+import axios from 'axios'
 const API_BASE = 'http://localhost:3000'
+
+const fetch = async (url, params) => {
+  return await axios.get(url, { params })
+}
 
 export default {
   name: 'app',
@@ -76,34 +50,24 @@ export default {
   data () {
     return {
       routes: [],
-      history: [],
-      urls: [
-        'http://www.fast.com',
-        'http://github.com',
-        'http://google.com',
-        'http://netflix.com',
-        'http://www.example.com'
-      ]
+      history: []
     }
   },
   mounted () {
     this.loadHistory()
   },
   methods: {
+    fetch: async (url, params) => await axios.get(url, { params }),
     async addUrl (route) {
-      await axios.get(`${API_BASE}/routes/add`, {
-        params: { route }
-      })
+      await fetch(`${API_BASE}/routes/add`, { route })
       this.loadHistory()
     },
     async loadHistory () {
-      this.routes = (await axios.get(`${API_BASE}/routes`)).data
-      this.history = (await axios.get(`${API_BASE}/history`)).data
+      this.routes = (await fetch(`${API_BASE}/routes`)).data
+      this.history = (await fetch(`${API_BASE}/history`)).data
     },
     async deleteRoute (route) {
-      await axios.get(`${API_BASE}/routes/remove`, {
-        params: { route }
-      })
+      await fetch(`${API_BASE}/routes/remove`, { route })
       this.loadHistory()
     }
   }
